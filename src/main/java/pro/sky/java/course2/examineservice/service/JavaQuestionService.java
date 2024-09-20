@@ -1,11 +1,15 @@
 package pro.sky.java.course2.examineservice.service;
 
+import org.springframework.stereotype.Service;
 import pro.sky.java.course2.examineservice.domain.Question;
 
 import java.util.*;
 
-public class JavaQuestionService implements QuestionService{
-    private Set<Question> questions = new HashSet<>();
+@Service
+public class JavaQuestionService implements QuestionService {
+    private final Set<Question> questions = new HashSet<>();
+
+    private final Random ran = new Random();
 
     @Override
     public Question add(String question, String answer) {
@@ -21,9 +25,10 @@ public class JavaQuestionService implements QuestionService{
     }
 
     @Override
-    public Question remove(Question question) {
-        questions.remove(question);
-        return question;
+    public Question remove(String question, String answer) {
+        Question q = new Question(question, answer);
+        questions.remove(q);
+        return q;
     }
 
     @Override
@@ -33,7 +38,10 @@ public class JavaQuestionService implements QuestionService{
 
     @Override
     public Question getRandomQuestion() {
-        return null;
+        return questions.stream()
+                .skip(ran.nextInt(0, questions.size()))
+                .findFirst()
+                .orElse(null);
     }
 
 }
