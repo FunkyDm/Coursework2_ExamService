@@ -18,15 +18,15 @@ public class ExaminerServiceImpl implements ExaminerService {
 
     @Override
     public Collection<Question> getQuestions(int amount) {
-        if (amount > questionService.getALl().size()) {
+        if (amount > questionService.getAll().size()) {
             throw new RequestLimitExceededException("Запрошено большее кол-во вопросов, чем хранится в сервисе");
         }
-        int i = 0;
-        while (i <= amount) {
-            questionService.getRandomQuestion();
-            i++;
+        Set<Question> randomQuestionsSet = new HashSet<>();
+        while (randomQuestionsSet.size() < amount) {
+            Question randomQuestion = questionService.getRandomQuestion();
+            randomQuestionsSet.add(randomQuestion);
         }
-        return Collections.unmodifiableCollection(questionService.getALl());
+        return Collections.unmodifiableCollection(randomQuestionsSet);
     }
 
 }

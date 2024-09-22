@@ -32,7 +32,7 @@ public class JavaQuestionService implements QuestionService {
     }
 
     @Override
-    public Collection<Question> getALl() {
+    public Collection<Question> getAll() {
         return Collections.unmodifiableCollection(questions);
     }
 

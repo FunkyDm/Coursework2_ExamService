@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pro.sky.java.course2.examineservice.domain.Question;
-import pro.sky.java.course2.examineservice.service.JavaQuestionService;
 import pro.sky.java.course2.examineservice.service.QuestionService;
 
 import java.util.Collection;
@@ -33,7 +32,7 @@ public class JavaQuestionController {
 
     @GetMapping
     Collection<Question> getQuestions() {
-        return questionService.getALl();
+        return questionService.getAll();
     }
 
 }
