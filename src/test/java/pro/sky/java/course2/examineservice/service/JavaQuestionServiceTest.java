@@ -19,7 +19,7 @@ class JavaQuestionServiceTest {
 
     @ParameterizedTest
     @MethodSource("provideParamsForAddMethod")
-    void add(String question, String answer) {
+    void add_WhenCorrectQuestion_ThenAddQuestion(String question, String answer) {
         Question expected = new Question(question, answer);
         Question actual = out.add(question, answer);
         assertEquals(expected, actual);
@@ -35,9 +35,9 @@ class JavaQuestionServiceTest {
 
     @ParameterizedTest
     @MethodSource("provideParamsForRemoveMethod")
-    void remove(String question, String answer) {
+    void remove_WhenCorrectParams_ThenRemoveQuestion(String question, String answer) {
         Question expected = new Question(question, answer);
-        Question actual = out.add(question, answer);
+        Question actual = out.remove(question, answer);
         assertEquals(expected, actual);
     }
 
@@ -50,7 +50,7 @@ class JavaQuestionServiceTest {
     }
 
     @Test
-    void shouldGetTrueWhenAllQuestionsExists() {
+    void getAll_shouldGetTrue_WhenAllQuestionsExists() {
         Question q1 = new Question("Java question 1", "Java answer 1");
         Question q2 = new Question("Java question 2", "Java answer 2");
         out.add(q1);
@@ -63,24 +63,24 @@ class JavaQuestionServiceTest {
     }
 
     @Test
-    void shouldGetAllWhenEmptyCollection(){
+    void getAll_shouldReturnTrue_WhenEmptyCollection(){
         Collection<Question> allQuestions = out.getAll();
 
         assertTrue(allQuestions.isEmpty());
     }
 
     @Test
-    void shouldReturnSingleQuestionWhenOneElementInCollection() {
+    void getRandomQuestion_shouldReturnSingleQuestion_WhenOneElementInCollection() {
         Question q1 = new Question("Java question 1", "Java answer 1");
         out.add(q1);
 
         assertEquals(q1,out.getRandomQuestion());
     }
 
-//    @Test
-//    void shouldReturnNullWhenEmptyCollection() {
-//        assertThrows(RequestLimitExceededException.class, out::getRandomQuestion);
-//    }
+    @Test
+    void getRandomQuestion_shouldReturnNull_WhenEmptyCollection() {
+        assertNull(out.getRandomQuestion());
+    }
 
 
 

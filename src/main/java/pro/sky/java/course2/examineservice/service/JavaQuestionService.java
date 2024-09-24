@@ -38,6 +38,9 @@ public class JavaQuestionService implements QuestionService {
 
     @Override
     public Question getRandomQuestion() {
+        if(questions.isEmpty()){
+            return null;
+        }
         return questions.stream()
                 .skip(ran.nextInt(0, questions.size()))
                 .findFirst()
